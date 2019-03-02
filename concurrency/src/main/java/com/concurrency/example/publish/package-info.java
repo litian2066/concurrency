@@ -7,4 +7,5 @@ package com.concurrency.example.publish;
         将对象的引用保存到volatile类型域或者AtomicRefenrence对象中
         将对象的引用保存到某个正确构造对象的final类型域中
         将对象的引用保存到一个由锁保护的域中
+
  */
