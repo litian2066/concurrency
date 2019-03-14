@@ -1,8 +1,11 @@
 package com.concurrency.example.commonUnSafe;
 
 import com.concurrency.annotations.NotThreadSafe;
+import com.concurrency.annotations.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,17 +13,15 @@ import java.util.concurrent.Semaphore;
 
 @Slf4j
 @NotThreadSafe
-public class StringExample1 {
+public class DateFornatExample {
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
 
     // 请求总数
     private static Integer threadTotal = 5000;
 
     // 同时执行请求总数
     private static Integer clientTotal = 200;
-
-    // StringBuild
-    private static StringBuilder stringBuilder = new StringBuilder();
-
 
     public static void main(String[] args) throws  Exception{
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -47,11 +48,15 @@ public class StringExample1 {
 
         countDownLatch.await();
         executorService.shutdown();
-        log.info("result: {}", stringBuilder.length());
+        // log.info("result: {}", stringBuffer.length());
     }
 
     private static void doSomeThing() {
-        stringBuilder.append("1");
+        try {
+            simpleDateFormat.parse("20190304");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -1,6 +1,7 @@
 package com.concurrency.example.commonUnSafe;
 
 import com.concurrency.annotations.NotThreadSafe;
+import com.concurrency.annotations.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
@@ -9,8 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 @Slf4j
-@NotThreadSafe
-public class StringExample1 {
+@ThreadSafe
+public class StringExample2 {
 
     // 请求总数
     private static Integer threadTotal = 5000;
@@ -19,7 +20,7 @@ public class StringExample1 {
     private static Integer clientTotal = 200;
 
     // StringBuild
-    private static StringBuilder stringBuilder = new StringBuilder();
+    private static StringBuffer stringBuffer = new StringBuffer();
 
 
     public static void main(String[] args) throws  Exception{
@@ -47,11 +48,11 @@ public class StringExample1 {
 
         countDownLatch.await();
         executorService.shutdown();
-        log.info("result: {}", stringBuilder.length());
+        log.info("result: {}", stringBuffer.length());
     }
 
     private static void doSomeThing() {
-        stringBuilder.append("1");
+        stringBuffer.append("1");
     }
 
 
